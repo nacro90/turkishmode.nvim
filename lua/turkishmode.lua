@@ -1,5 +1,0 @@
-local turkishmode = {}
-
-
-
-return turkishmode
