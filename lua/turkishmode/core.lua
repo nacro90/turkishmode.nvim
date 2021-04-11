@@ -17,7 +17,7 @@ local function create_context_chars(chars, char_index)
    local cursor = start
    for i = cursor, char_index - 1 do
       local cursor_char = chars[i]
-      cursor_char = string.gsub(cursor_char, '%W', ' ')
+      cursor_char = string.gsub(cursor_char, '[%p]', ' ')
       cursor_char = string.lower(cursor_char)
       local upcased_turkish = charmaps.upcase_marker_tbl[cursor_char]
       context[#context + 1] = upcased_turkish or cursor_char
@@ -51,6 +51,8 @@ local function has_pattern_match(chars, index)
 
    local min_rank = math.huge
    local context, start, limit = create_context_chars(chars, index)
+
+   log.debug('context:', context)
 
    for i = 1, index - start + 3 do
       for j = index - start + 3, limit - start + 3 do
