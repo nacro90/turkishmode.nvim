@@ -91,9 +91,10 @@ function core.deasciify(str)
 end
 
 function core.asciify(str)
+   local asciify_tbl = charmaps.asciify_tbl
    local asciified_chars = {}
    for i, uchar in unicode.enumerate(str) do
-      asciified_chars[i] = charmaps.asciify_tbl[uchar] or uchar
+      asciified_chars[i] = asciify_tbl[uchar] or uchar
    end
    return table.concat(asciified_chars)
 end
