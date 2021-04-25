@@ -17,12 +17,6 @@ induction.
 - Deasciify and asciify the current buffer
 - Deasciify and asciify the current line
 
-You can use the `core` module for raw string asciification and deasciification:
-
-```lua
-require('turkishmode.core').deasciify('arbitrary string')
-```
-
 ## Installation
 
 Use your favorite plugin manager in Neovim.
@@ -42,9 +36,13 @@ You can create commands to call the functions easily:
 
 ```viml
 :command DeasciifyBuf lua require('turkishmode').deasciify_buffer()
-:command DeasciifyLine lua require('turkishmode').deasciify_line()
-:command AsciifyBuf lua require('turkishmode').asciify_buffer()
-:command DeasciifyLine lua require('turkishmode').asciify_line()
+```
+
+You can use the `core` module for raw string asciification and deasciification:
+
+```lua
+require('turkishmode.core').deasciify('arbitrary string')
+require('turkishmode.core').asciify('arbitrary string')
 ```
 
 ## TODO
