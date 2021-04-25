@@ -2,7 +2,7 @@
 
 ![turkishmode.gif](assets/turkishmode.gif)
 
-This project is a lua port of Deniz Yüret's emacs plugin [turkish-mode](https://github.com/emres/turkish-mode).
+This project is a Lua port of Deniz Yüret's emacs plugin [turkish-mode](https://github.com/emres/turkish-mode).
 
 
 This is for the people trying to type Turkish documents on a U.S. keyboard using
