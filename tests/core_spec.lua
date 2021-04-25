@@ -1,6 +1,6 @@
 local core = require('turkishmode.core')
 
-local function eq(left, right) return assert.are.same(left, right) end
+local function eq(left, right) return assert.are.equals(left, right) end
 
 describe('Deasciification', function()
 
@@ -33,12 +33,12 @@ describe('Deasciification', function()
    end)
 
    it('Deasciify unusual text', function()
-      local input = 'BUYUKCE      BIR  (--)   TOPAC /// TOPARLAGI\n\n VE DE YUMAGI yumagi.'
+      local input =
+         'BUYUKCE      BIR  (--)   TOPAC /// TOPARLAGI\n\n VE DE YUMAGI yumagi.'
       local expected =
          'BÜYÜKÇE      BİR  (--)   TOPAÇ /// TOPARLAĞI\n\n VE DE YUMAĞI yumağı.'
       eq(core.deasciify(input), expected)
    end)
-
 
    it('Deasciify long text', function()
       local input =
@@ -97,9 +97,9 @@ describe('Asciification', function()
    end)
 
    it('Asciify simple sentence 2', function()
-      local input = 'Acısından bağırıp çağırarak saçma sözler söylemek.'
-      local expected =
-         'Acisindan bagirip cagirarak sacma sozler soylemek.'
+      local input =
+         'Acısından bağırıp çağırarak saçma sözler söylemek.'
+      local expected = 'Acisindan bagirip cagirarak sacma sozler soylemek.'
       eq(core.asciify(input), expected)
    end)
 
@@ -132,7 +132,8 @@ describe('Asciification', function()
    end)
 
    it('Asciify with new line', function()
-      local input = 'Düşman sizce\nüzülmeli mi yoksa üzümü\nbağından mı yemeli?'
+      local input =
+         'Düşman sizce\nüzülmeli mi yoksa üzümü\nbağından mı yemeli?'
       local expected =
          'Dusman sizce\nuzulmeli mi yoksa uzumu\nbagindan mi yemeli?'
       eq(core.asciify(input), expected)
