@@ -63,6 +63,27 @@ describe('Deasciification', function()
       eq(core.deasciify(input), expected)
    end)
 
+   it('Deasciify with new line 2', function()
+      local input =
+         'Sehre girmeden yol kenarinda agaclikli bir bahce gormus. ' ..
+            'Bahcenin ortasinda kocaman bir havuz varmis. Etrafta da kimsecikler yokmus.\n' ..
+            'Gidip havuzun kenarina oturmus. Elleri titreye titreye ucuncu limonu cikarip kesmis.\n' ..
+            'Bu sefer, icinden, evvelkilerden daha guzel, ayin ondordu gibi bir kiz cikmis. Baslamis:\n' ..
+            'Su! Su! demeye…'
+      local expected =
+         'Şehre girmeden yol kenarında ağaçlıklı bir bahçe görmüş. Bahçenin ortasında kocaman bir havuz varmış. Etrafta da kimsecikler yokmuş.\n' ..
+            'Gidip havuzun kenarına oturmuş. Elleri titreye titreye üçüncü limonu çıkarıp kesmiş.\n' ..
+            'Bu sefer, içinden, evvelkilerden daha güzel, ayın ondördü gibi bir kız çıkmış. Başlamış:\n' ..
+            'Şu! Şu! demeye…'
+      eq(core.deasciify(input), expected)
+   end)
+
+   it('Deasciify with interesting punctuation', function()
+      local input = 'Baslamis: Su! Su! demeye…'
+      local expected = 'Başlamış: Şu! Şu! demeye…'
+      eq(core.deasciify(input), expected)
+   end)
+
 end)
 
 describe('Asciification', function()
@@ -90,8 +111,7 @@ describe('Asciification', function()
 
    it('Asciify with caps', function()
       local input = 'BÜYÜKÇE BİR TOPAÇ TOPARLAĞI VE DE YUMAĞI yumağı.'
-      local expected =
-         'BUYUKCE BIR TOPAC TOPARLAGI VE DE YUMAGI yumagi.'
+      local expected = 'BUYUKCE BIR TOPAC TOPARLAGI VE DE YUMAGI yumagi.'
       eq(core.asciify(input), expected)
    end)
 

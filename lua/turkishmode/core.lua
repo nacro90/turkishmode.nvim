@@ -17,7 +17,7 @@ local function create_context_chars(chars, char_index)
    local cursor = start
    for i = cursor, char_index - 1 do
       local cursor_char = chars[i]
-      cursor_char = string.gsub(cursor_char, '%p', ' ')
+      cursor_char = string.gsub(cursor_char, '[%p%s]', ' ')
       cursor_char = string.lower(cursor_char)
       local upcased_turkish = charmaps.upcase_marker_tbl[cursor_char]
       context[#context + 1] = upcased_turkish or cursor_char
