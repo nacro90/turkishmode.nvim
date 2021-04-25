@@ -2,7 +2,7 @@ local unicode = {}
 
 local function iter(str) return str:gmatch('([%z\1-\127\194-\244][\128-\191]*)') end
 
-function unicode.enumerate(str)
+local function enumerate(str)
    return coroutine.wrap(function()
       local i = 1
       for uchar in iter(str) do
@@ -13,15 +13,16 @@ function unicode.enumerate(str)
 end
 
 function unicode.sub(str, i, j)
+   i = math.max(1, i)
    local tbl = {}
    local cursor = 1
-   local matcher = iter(str)
+   local iterator = iter(str)
    while cursor < i do
-      matcher()
+      iterator()
       cursor = cursor + 1
    end
    repeat
-      tbl[cursor - i + 1] = matcher()
+      tbl[cursor - i + 1] = iterator()
       cursor = cursor + 1
    until cursor > j
    return table.concat(tbl)
@@ -40,15 +41,17 @@ function unicode.chars(str)
 end
 
 function unicode.char_at(str, i)
-   local cursor = 1
-   local matcher = str:ugmatch()
-   local uchar
-   repeat
-      uchar = matcher()
-      cursor = cursor + 1
-   until cursor > i or not uchar
-   return uchar
+   if i < 1 then return '', i end
+   local bytes = 1
+   local next_bytes = 0
+   for cursor, char in enumerate(str) do
+      bytes = bytes + next_bytes
+      next_bytes = #char
+      if cursor == i then return char, bytes end
+   end
+   return '', bytes
 end
 
 unicode.iter = iter
+unicode.enumerate = enumerate
 return unicode
