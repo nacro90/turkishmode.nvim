@@ -2,8 +2,9 @@
 
 ![turkishmode.gif](assets/turkishmode.gif)
 
-This project is a lua port of [this python
-project](https://github.com/emres/turkish-deasciifier).
+This project is a lua port of Deniz Yüret's emacs plugin [turkish-mode
+project](https://github.com/emres/turkish-mode).
+
 
 This is for the people trying to type Turkish documents on a U.S. keyboard using
 Neovim. The plugin provides a `turkishmode` module that can be asciify and
