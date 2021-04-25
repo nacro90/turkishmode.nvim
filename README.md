@@ -1,5 +1,7 @@
 # turkishmode.nvim
 
+![turkishmode.gif](assets/turkishmode.gif)
+
 This project is a lua port of [this python
 project](https://github.com/emres/turkish-deasciifier).
 
@@ -23,13 +25,13 @@ Use your favorite plugin manager in Neovim.
 
 ## Usage
 
-You can call the buffer functions directly:
+You can call the module functions directly:
 
-```lua
+```viml
 :lua require('turkishmode').deasciify_buffer()
-:lua require('turkishmode').deasciify_line()
+:lua require('turkishmode').deasciify_current_line()
 :lua require('turkishmode').asciify_buffer()
-:lua require('turkishmode').asciify_line()
+:lua require('turkishmode').asciify_current_line()
 ```
 
 You can create commands to call the functions easily:
