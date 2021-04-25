@@ -116,7 +116,7 @@ describe('Unicode operations', function()
       local unicode_str = 'üzümlü kek'
       local expected_char = 'ü'
       local expected_byte_position = 4
-      local result_char, result_byte_position = unicode.char_at(unicode_str, 3)
+      local result_char, result_byte_position = unicode.char_at_idx(unicode_str, 3)
       assert.are.equals(expected_char, result_char)
       assert.are.equals(expected_byte_position, result_byte_position)
    end)
@@ -124,16 +124,16 @@ describe('Unicode operations', function()
    it('Char at negative index should be empty string', function()
       local unicode_str = 'üzümlü kek'
       local expected = ''
-      local result = unicode.char_at(unicode_str, -1)
+      local result = unicode.char_at_idx(unicode_str, -1)
       assert.are.same(expected, result)
    end)
 
-   it('Char at too large index should be nil', function()
+   it('Char at too large index should be empty string', function()
       local unicode_str = 'üzümlü kek'
       local expected_char = ''
       local given_position = 27
       local expected_position = 13
-      local result_char, result_byte_position = unicode.char_at(unicode_str, given_position)
+      local result_char, result_byte_position = unicode.char_at_idx(unicode_str, given_position)
       assert.are.same(expected_char, result_char)
       assert.are.same(expected_position, result_byte_position)
    end)

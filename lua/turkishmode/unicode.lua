@@ -40,7 +40,7 @@ function unicode.chars(str)
    return tbl
 end
 
-function unicode.char_at(str, i)
+function unicode.char_at_idx(str, i)
    if i < 1 then return '', i end
    local bytes = 1
    local next_bytes = 0

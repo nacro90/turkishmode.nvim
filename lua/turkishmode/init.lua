@@ -1,12 +1,7 @@
 local turkishmode = {}
 
-local log = require('turkishmode.log')
-local unicode = require('turkishmode.unicode')
-local charmaps = require('turkishmode.charmaps')
-
 local core = require('turkishmode.core')
 
-local uv = vim.loop
 local api = vim.api
 
 function turkishmode.deasciify_current_line()
@@ -15,10 +10,18 @@ function turkishmode.deasciify_current_line()
    api.nvim_set_current_line(deasciified)
 end
 
+function turkishmode.asciify_current_line()
+   local cur_line = api.nvim_get_current_line()
+   local asciified = core.asciify(cur_line)
+   api.nvim_set_current_line(asciified)
+end
+
 function turkishmode.deasciify_buffer(bufnr)
    bufnr = bufnr or api.nvim_get_current_buf()
    local lines = api.nvim_buf_get_lines(bufnr, 0, -1, true)
-   print(core.deasciify(table.concat(lines, '\n')))
+   local buf_text = table.concat(lines, '\n')
+   local deasciified = core.deasciify(buf_text)
+   api.nvim_buf_set_lines(bufnr, 0, -1, true, vim.split(deasciified, '\n'))
 end
 
 function turkishmode.asciify_buffer(bufnr)
