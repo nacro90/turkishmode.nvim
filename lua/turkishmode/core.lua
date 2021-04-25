@@ -80,6 +80,10 @@ local function is_toggle_needed(chars, index)
 
 end
 
+function core.toggle(char)
+   return charmaps.toggle_tbl[char] or char
+end
+
 function core.deasciify(str)
    local toggle_tbl = charmaps.toggle_tbl
    local chars = unicode.chars(str)

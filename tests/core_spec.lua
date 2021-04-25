@@ -139,4 +139,23 @@ describe('Asciification', function()
       eq(core.asciify(input), expected)
    end)
 
+   it('Toggle turkish char', function()
+      local unicode_char = 'ü'
+      local expected_char = 'u'
+      eq(expected_char, core.toggle(unicode_char))
+   end)
+
+   it('Toggle ascii char that does not have mapping in turkish chars',
+      function()
+         local unicode_char = 'k'
+         local expected_char = 'k'
+         eq(expected_char, core.toggle(unicode_char))
+      end)
+
+   it('Toggle ascii char that has mapping in turkish chars', function()
+      local unicode_char = 'u'
+      local expected_char = 'ü'
+      eq(expected_char, core.toggle(unicode_char))
+   end)
+
 end)
