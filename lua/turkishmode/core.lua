@@ -3,12 +3,23 @@ local core = {}
 local charmaps = require('turkishmode.charmaps')
 local log = require('turkishmode.log')
 local unicode = require('turkishmode.unicode')
-local patterns = require('turkishmode.patterns')
 
 local len_context = 10
 
-local function create_context_chars(chars, char_index)
+local patterns = nil
 
+local function parse_pattern_file(file)
+   file = file or 'data/patterns.txt'
+   local ptr = {}
+   for line in io.lines(file) do
+      local char, pattern, value = unpack(vim.split(line, ':'))
+      if not ptr[char] then ptr[char] = {} end
+      ptr[char][pattern] = tonumber(value)
+   end
+   return ptr
+end
+
+local function create_context_chars(chars, char_index)
    if char_index > #chars then return '' end
 
    local context = {' ', ' '}
@@ -39,12 +50,12 @@ local function create_context_chars(chars, char_index)
    context[#context + 1] = ' '
 
    return context, start, limit
-
 end
 
 local function has_pattern_match(chars, index)
    local char = chars[index]
    local asciified_char = charmaps.asciify_tbl[char] or char
+   patterns = patterns or parse_pattern_file()
    local char_patterns = patterns[string.lower(asciified_char)]
 
    if not char_patterns then return false end
@@ -77,12 +88,9 @@ local function is_toggle_needed(chars, index)
    if char ~= asciified then is_need = not is_need end
 
    return is_need
-
 end
 
-function core.toggle(char)
-   return charmaps.toggle_tbl[char] or char
-end
+function core.toggle(char) return charmaps.toggle_tbl[char] or char end
 
 function core.deasciify(str)
    local toggle_tbl = charmaps.toggle_tbl
