@@ -138,4 +138,16 @@ describe('Unicode operations', function()
       assert.are.same(expected_position, result_byte_position)
    end)
 
+   describe('is_ascii', function()
+
+      it('should return true when given an ascii byte', function()
+         assert.is_true(unicode.is_ascii('a'))
+      end)
+
+      it('should return false when given an non-ascii char', function()
+         assert.is_false(unicode.is_ascii('ü'))
+      end)
+
+   end)
+
 end)

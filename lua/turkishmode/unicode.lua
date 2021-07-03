@@ -54,4 +54,9 @@ end
 
 unicode.iter = iter
 unicode.enumerate = enumerate
+
+function unicode.is_ascii(str)
+   return str:len() < 2 and true or false
+end
+
 return unicode
