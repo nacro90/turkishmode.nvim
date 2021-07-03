@@ -6,19 +6,6 @@ local unicode = require('turkishmode.unicode')
 
 local len_context = 10
 
-local patterns = nil
-
-local function parse_pattern_file(file)
-   file = file or 'data/patterns.txt'
-   local ptr = {}
-   for line in io.lines(file) do
-      local char, pattern, value = unpack(vim.split(line, ':'))
-      if not ptr[char] then ptr[char] = {} end
-      ptr[char][pattern] = tonumber(value)
-   end
-   return ptr
-end
-
 local function create_context_chars(chars, char_index)
    if char_index > #chars then return '' end
 
@@ -55,7 +42,7 @@ end
 local function has_pattern_match(chars, index)
    local char = chars[index]
    local asciified_char = charmaps.asciify_tbl[char] or char
-   patterns = patterns or parse_pattern_file()
+   local patterns = require('turkishmode.patterns')
    local char_patterns = patterns[string.lower(asciified_char)]
 
    if not char_patterns then return false end
