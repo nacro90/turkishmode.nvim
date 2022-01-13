@@ -1,6 +1,6 @@
 local unicode = require('turkishmode.unicode')
 
-describe('Unicode operations', function()
+describe('unicode', function()
 
    it('Iterate unicode str with turkish chars', function()
       local unicode_str = 'öğret alım üzüme çalış'

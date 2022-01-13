@@ -1,6 +1,15 @@
 local unicode = {}
 
-local function iter(str) return str:gmatch('([%z\1-\127\194-\244][\128-\191]*)') end
+local function iter(str) 
+  -- return str:gmatch('([%z\1-\127\194-\244][\128-\191]*)') 
+
+  local positions = vim.str_utf_pos(str)
+  return function()
+
+    for i, pos in ipairs(positions)
+
+  end
+end
 
 local function enumerate(str)
    return coroutine.wrap(function()
