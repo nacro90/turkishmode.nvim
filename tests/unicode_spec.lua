@@ -138,7 +138,7 @@ describe('Unicode operations', function()
       assert.are.same(expected_position, result_byte_position)
    end)
 
-   describe('is_ascii', function()
+   describe('is_ascii()', function()
 
       it('should return true when given an ascii byte', function()
          assert.is_true(unicode.is_ascii('a'))
@@ -146,6 +146,24 @@ describe('Unicode operations', function()
 
       it('should return false when given an non-ascii char', function()
          assert.is_false(unicode.is_ascii('ü'))
+      end)
+
+   end)
+
+   describe('first()', function()
+
+      it('should return the first char when given ascii initial', function()
+         local str = 'abcd'
+         local expected = 'a'
+         local actual = unicode.first(str)
+         assert.are.equals(expected, actual)
+      end)
+
+      it('should return the first char when given non-ascii initial', function()
+         local str = 'üzümlü'
+         local expected = 'ü'
+         local actual = unicode.first(str)
+         assert.are.equals(expected, actual)
       end)
 
    end)

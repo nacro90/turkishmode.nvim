@@ -59,4 +59,8 @@ function unicode.is_ascii(str)
    return str:len() < 2 and true or false
 end
 
+function unicode.first(str)
+   return unicode.char_at_idx(str, 1)
+end
+
 return unicode
